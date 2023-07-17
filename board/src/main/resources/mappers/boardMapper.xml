@@ -19,4 +19,13 @@
 				VALUES(#{title},#{content},#{writer});
 	</insert>
 	
+	<!-- 게시물 조회 -->
+	<select id="view" resultType='com.board.domain.BoardVO'>
+		SELECT
+			bno, title, writer, content, regDate, viewCnt
+		FROM
+			board.tbl_board
+		WHERE
+			bno = #{bno}
+	</select>
 </mapper>
