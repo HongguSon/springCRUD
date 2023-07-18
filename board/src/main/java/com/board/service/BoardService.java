@@ -24,4 +24,7 @@ public interface BoardService {
 	// Pagination
 	public int count() throws Exception;
 	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception;
+
+	// Pagination + Search
+	public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
 }
