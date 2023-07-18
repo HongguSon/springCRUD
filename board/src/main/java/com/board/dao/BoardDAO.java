@@ -16,4 +16,7 @@ public interface BoardDAO {
   public void modify(BoardVO vo) throws Exception;
   // 게시물 삭제
   public void delete(int bno) throws Exception;
+  // Pagination
+  public int count() throws Exception;
+  public List<BoardVO> listPage(int displayPost, int postNum) throws Exception;
 }

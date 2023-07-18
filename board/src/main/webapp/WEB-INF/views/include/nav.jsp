@@ -7,6 +7,10 @@
  </li>
  
  <li>
+  <a href="/board/listPage?num=1">글 목록(Pagination)</a> 
+ </li>
+ 
+ <li>
   <a href="/board/write">글 작성</a> 
  </li> 
 </ul>
