@@ -21,8 +21,10 @@ public interface BoardService {
 	// 게시물 삭제
 	public void delete(int bno) throws Exception;
 
+	// 총 게시물 개수 + Search
+	public int count(String searchType, String keyword) throws Exception;
+	
 	// Pagination
-	public int count() throws Exception;
 	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception;
 
 	// Pagination + Search

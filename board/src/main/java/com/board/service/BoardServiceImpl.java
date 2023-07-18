@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// Pagination
 	@Override
-	public int count() throws Exception {
-		return dao.count();
+	public int count(String searchType, String keyword) throws Exception {
+		return dao.count(searchType, keyword);
 	}
 
 	@Override

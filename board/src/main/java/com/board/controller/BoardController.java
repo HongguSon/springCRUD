@@ -78,10 +78,12 @@ public class BoardController {
   
   //게시물 목록 + Pagination
   @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-  public void getListPage(Model model, @RequestParam("num") int num) throws Exception { 
+  public void getListPage(Model model, @RequestParam("num") int num,
+		  @RequestParam(value = "searchType", required = false, defaultValue = "title") String searchType,
+		  @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception { 
 	  Page page = new Page();
 	  page.setNum(num);
-	  page.setCount(service.count());
+	  page.setCount(service.count(searchType, keyword));
 	  
 	  List<BoardVO> list = null;
 	  list = service.listPage(page.getDisplayPost(), page.getPostNum());
@@ -128,13 +130,20 @@ public class BoardController {
 //	  model.addAttribute("select", num);
 		 
  }
+  
+  // Pagination + Search
   @RequestMapping(value = "/listPageSearch", method = RequestMethod.GET)
   public void getListPageSearch(Model model, @RequestParam("num") int num,
 		  @RequestParam(value = "searchType", required = false, defaultValue = "title") String searchType,
 		  @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) throws Exception { 
 	  Page page = new Page();
 	  page.setNum(num);
-	  page.setCount(service.count());
+	  page.setCount(service.count(searchType, keyword));
+	  
+	  page.setSearchType(searchType);
+	  page.setKeyword(keyword);
+	  
+//	  page.setSearchTypeKeyword(searchType, keyword);
 	  
 	  List<BoardVO> list = null;
 	  list = service.listPageSearch(page.getDisplayPost(), page.getPostNum(), searchType, keyword);
@@ -142,5 +151,8 @@ public class BoardController {
 	  model.addAttribute("list", list);
 	  model.addAttribute("page", page);
 	  model.addAttribute("select", num);
+	  
+//	  model.addAttribute("searchType", searchType);
+//	  model.addAttribute("keyword", keyword);
   }
 }

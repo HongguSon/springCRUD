@@ -54,8 +54,13 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// Pagination
 	@Override
-	public int count() throws Exception {
-		return sql.selectOne(namespace + ".count");
+	public int count(String searchType, String keyword) throws Exception {
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		data.put("searchType", searchType);
+		data.put("keyword", keyword);
+		
+		return sql.selectOne(namespace + ".count", data);
 	}
 
 	@Override

@@ -16,8 +16,9 @@ public interface BoardDAO {
   public void modify(BoardVO vo) throws Exception;
   // 게시물 삭제
   public void delete(int bno) throws Exception;
+  // 총 게시물 개수 + Search
+  public int count(String searchType, String keyword) throws Exception;
   // Pagination
-  public int count() throws Exception;
   public List<BoardVO> listPage(int displayPost, int postNum) throws Exception;
   // Pagination + Search
   public List<BoardVO> listPageSearch(int displayPost, int postNum, String searchType, String keyword) throws Exception;
