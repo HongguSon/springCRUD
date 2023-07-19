@@ -32,4 +32,13 @@
 		where rno = #{rno}
 			and bno = #{bno}
 	</delete>
+	
+	<!-- 단일 댓글 조회 -->
+	<select id="replySelect" parameterType="com.board.domain.ReplyVO" resultType="com.board.domain.ReplyVO">
+		select
+			rno, bno, writer, content, regDate
+		from board.tbl_reply
+			where bno = #{bno}
+			and rno = #{rno}
+	</select>
 </mapper>

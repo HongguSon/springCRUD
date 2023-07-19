@@ -30,13 +30,19 @@ public class ReplyServiceImpl implements ReplyService {
 	// 댓글 수정
 	@Override
 	public void modify(ReplyVO vo) throws Exception {
-		dao.write(vo);
+		dao.modify(vo);
 	}
 
 	// 댓글 삭제
 	@Override
 	public void delete(ReplyVO vo) throws Exception {
-		dao.write(vo);
+		dao.delete(vo);
+	}
+
+	// 단일 댓글 조회
+	@Override
+	public ReplyVO replySelect(ReplyVO vo) throws Exception {
+		return dao.replySelect(vo);
 	}
 	
 	
