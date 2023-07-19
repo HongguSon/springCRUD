@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.domain.BoardVO;
 import com.board.domain.Page;
+import com.board.domain.ReplyVO;
 import com.board.service.BoardService;
+import com.board.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -20,7 +22,10 @@ public class BoardController {
 
   @Inject
   BoardService service;
-
+  
+  @Inject
+  ReplyService replyService;
+  
   // 게시물 목록
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public void getList(Model model) throws Exception { 
@@ -52,6 +57,11 @@ public class BoardController {
 	  BoardVO vo = service.view(bno);
 	  
 	  model.addAttribute("view", vo);
+	  
+	  // 댓글 조회(게시물에 해당하는 bno를 갖고있는 모든 댓글)
+	  List<ReplyVO> reply = null;
+	  reply = replyService.list(bno);
+	  model.addAttribute("reply", reply);
   }
   
   // 게시물 수정
