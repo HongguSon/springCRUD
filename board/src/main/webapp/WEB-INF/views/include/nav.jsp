@@ -23,6 +23,9 @@
  <li class="nav-item">
   <a href="/board/write">글 작성</a> 
  </li> 
+ <li class="nav-item">
+  <a href="/">홈으로</a> 
+ </li> 
 </ul>
 <hr />
 </div>

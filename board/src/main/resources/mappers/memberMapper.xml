@@ -4,8 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mappers.member">
 	<!-- 회원가입 -->
-	<insert id="register">
+	<insert id="register" parameterType="com.board.domain.MemberVO">
 		insert into board.myMember(userId, userPass, userName)
 			values(#{userId}, #{userPass}, #{userName})
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.board.domain.MemberVO" resultType="com.board.domain.MemberVO">
+		SELECT *
+		FROM board.myMember
+		WHERE userId = #{userId}
+		AND userPass = #{userPass}
+	</select>
 </mapper>
