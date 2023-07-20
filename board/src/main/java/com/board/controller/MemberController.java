@@ -1,10 +1,8 @@
 package com.board.controller;
 
-import java.io.PrintWriter;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -51,6 +49,18 @@ public class MemberController {
 	// 로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String getLogout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	// 비밀번호 변경
+	@RequestMapping(value="/memberModify", method=RequestMethod.GET)
+	public void getMemberModify() throws Exception {
+		
+	}
+	@RequestMapping(value="/memberModify", method=RequestMethod.POST)
+	public String postMemberModify(HttpSession session, MemberVO vo) throws Exception {
+		memberService.memberModify(vo);
 		session.invalidate();
 		return "redirect:/";
 	}

@@ -34,6 +34,7 @@
 	<c:when test="${member != null}">
 		<p>${member.userName}님 환영합니다.</p>
 		<a href="member/logout">로그아웃</a>
+		<a href="member/memberModify">비밀번호 변경</a>
 	</c:when>
 	<c:otherwise>
 		<p>로그인 해주세요.</p>

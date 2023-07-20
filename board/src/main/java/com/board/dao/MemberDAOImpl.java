@@ -27,4 +27,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return temp;
 	}
 
+	@Override
+	public void memberModify(MemberVO vo) throws Exception {
+		sql.update(namespace + ".memberModify", vo);
+		
+	}
+
 }
