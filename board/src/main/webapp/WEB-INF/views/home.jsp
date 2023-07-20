@@ -6,14 +6,28 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-<p>
-<a href="/board/listPageSearch?num=1">게시물 목록</a><br />
-<a href="/board/write">게시물 작성</a>
-</p>
+<div id="nav">
+ <%@ include file="./include/nav.jsp" %>
+</div>
+<div class="container">
+<h2>
+환영합니다!
+</h2>
+<br/><br/>
+<form role="form" method="post" autocomplete="off">
+	<p>
+		<label for="userId">아이디</label>
+		<input type="text" id="userId" name="userId" />
+	</p>
+	<p>
+		<label for="userPass">패스워드</label>
+		<input type="password" id="userPass" name="userPass" />
+	</p>
+	<div class="">
+		<button type="submit" class="btn btn-light">로그인</button>
+		<div class="btn btn-light"><a href="/member/register" style="text-decoration:none;">회원가입</a></div>
+	</div>
+</form>
+</div>
 </body>
 </html>
