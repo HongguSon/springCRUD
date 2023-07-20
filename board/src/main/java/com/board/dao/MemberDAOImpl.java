@@ -33,4 +33,10 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public void memberDelete(MemberVO vo) throws Exception {
+		sql.delete(namespace + ".memberDelete", vo);
+		
+	}
+
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.domain.MemberVO;
@@ -62,6 +63,29 @@ public class MemberController {
 	public String postMemberModify(HttpSession session, MemberVO vo) throws Exception {
 		memberService.memberModify(vo);
 		session.invalidate();
+		return "redirect:/";
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value="/memberDelete", method = RequestMethod.GET)
+	public void getMemberDelete() throws Exception {
+		
+	}
+	
+	@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
+	public String postMemberDelete(HttpSession session, MemberVO vo, RedirectAttributes rttr) throws Exception {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		String oldPass = member.getUserPass();
+		String newPass = vo.getUserPass();
+		
+		if(!(oldPass.equals(newPass))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/memberDelete";
+		} else {
+			session.invalidate();
+		}
+		memberService.memberDelete(vo);
 		return "redirect:/";
 	}
 }

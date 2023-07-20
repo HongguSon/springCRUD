@@ -9,4 +9,6 @@ public interface MemberDAO {
 	public MemberVO login(MemberVO vo) throws Exception;
 	// 비밀번호 변경
 	public void memberModify(MemberVO vo) throws Exception;
+	// 회원 탈퇴
+	public void memberDelete(MemberVO vo) throws Exception;
 }

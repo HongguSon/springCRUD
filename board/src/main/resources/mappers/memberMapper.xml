@@ -24,4 +24,11 @@
 			userPass= #{userPass}
 		WHERE userName = #{userName}
 	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete">
+		DELETE FROM board.myMember
+		WHERE userId = #{userId}
+		AND userPass = #{userPass}
+	</delete>
 </mapper>
