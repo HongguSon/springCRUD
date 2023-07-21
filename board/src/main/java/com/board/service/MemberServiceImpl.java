@@ -34,4 +34,9 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public MemberVO idCheck(String userId) throws Exception {
+		return dao.idCheck(userId);
+	}
+
 }

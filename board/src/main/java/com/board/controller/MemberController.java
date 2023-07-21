@@ -88,4 +88,20 @@ public class MemberController {
 		memberService.memberDelete(vo);
 		return "redirect:/";
 	}
+	
+	// 아이디 중복 확인
+	@ResponseBody
+	@RequestMapping(value ="/idCheck", method = RequestMethod.POST)
+	public int postIdCheck(HttpServletRequest req) throws Exception {
+		String userId = req.getParameter("userId");
+
+		MemberVO idCheck = memberService.idCheck(userId);
+
+		int result = 0;
+		
+		if(idCheck != null) {
+			result = 1;
+		}
+		return result;
+	}
 }

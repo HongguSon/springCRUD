@@ -11,4 +11,6 @@ public interface MemberDAO {
 	public void memberModify(MemberVO vo) throws Exception;
 	// 회원 탈퇴
 	public void memberDelete(MemberVO vo) throws Exception;
+	// 아이디 중복 확인
+	public MemberVO idCheck(String userId) throws Exception;
 }
