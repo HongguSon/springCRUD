@@ -22,8 +22,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberVO login(MemberVO vo) throws Exception {
-		MemberVO temp = sql.selectOne(namespace + ".login", vo);
-//		System.out.println(temp);
+//		MemberVO temp = sql.selectOne(namespace + ".login", vo);
+		MemberVO temp = sql.selectOne(namespace + ".loginSecurity", vo);
 		return temp;
 	}
 

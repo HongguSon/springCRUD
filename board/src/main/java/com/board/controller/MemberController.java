@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,9 @@ public class MemberController {
 	@Inject
 	MemberService memberService;
 	
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
+	
 	// 회원가입(get, post)
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public void getRegister() throws Exception {
@@ -28,6 +33,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String postRegister(MemberVO vo) throws Exception {
+		String inputPass = vo.getUserPass();
+		String pass = passEncoder.encode(inputPass);
+		vo.setUserPass(pass);
+		
 		memberService.register(vo);
 		return "redirect:/";
 	}
@@ -37,11 +46,14 @@ public class MemberController {
 	public String postLogin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		HttpSession session = req.getSession();
 		MemberVO login = memberService.login(vo);
-		if(login == null) {
+		
+		boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
+		
+		if(login != null && passMatch) {
+			session.setAttribute("member", login);
+		} else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
-		} else {
-			session.setAttribute("member", login);
 		}
 		return "redirect:/";
 		
@@ -61,6 +73,10 @@ public class MemberController {
 	}
 	@RequestMapping(value="/memberModify", method=RequestMethod.POST)
 	public String postMemberModify(HttpSession session, MemberVO vo) throws Exception {
+		String inputPass = vo.getUserPass();
+		String pass = passEncoder.encode(inputPass);
+		vo.setUserPass(pass);
+		
 		memberService.memberModify(vo);
 		session.invalidate();
 		return "redirect:/";
@@ -75,11 +91,11 @@ public class MemberController {
 	@RequestMapping(value="/memberDelete", method = RequestMethod.POST)
 	public String postMemberDelete(HttpSession session, MemberVO vo, RedirectAttributes rttr) throws Exception {
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		
 		String oldPass = member.getUserPass();
 		String newPass = vo.getUserPass();
+		boolean passMatch = passEncoder.matches(vo.getUserPass(), member.getUserPass());
 		
-		if(!(oldPass.equals(newPass))) {
+		if(!(passMatch)) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/member/memberDelete";
 		} else {

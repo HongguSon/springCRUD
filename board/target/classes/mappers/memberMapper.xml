@@ -17,6 +17,14 @@
 		AND userPass = #{userPass}
 	</select>
 	
+	<!-- 로그인(PW암호화) -->
+	<select id="loginSecurity" resultType="com.board.domain.MemberVO">
+		select
+			userId, userName, userPass
+		from board.myMember
+		where userId = #{userId}
+	</select>
+	
 	<!-- 비밀번호 변경 -->
 	<update id="memberModify">
 		UPDATE board.myMember
